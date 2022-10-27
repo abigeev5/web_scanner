@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="2" tests="8" time="0.723" timestamp="2022-09-01T17:44:36.055544" hostname="abigeev"><testcase classname="test_1.TestAuthApi" name="test_get_token_1" file="test_1.py" line="24" time="0.014"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestAuthApi" name="test_get_token_2" file="test_1.py" line="30" time="0.024"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestAuthApi" name="test_get_token_3" file="test_1.py" line="35" time="0.030"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestAuthApi" name="test_get_token_4" file="test_1.py" line="40" time="0.004"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestUserApi" name="test_create_user_1" file="test_1.py" line="47" time="0.001"><skipped type="pytest.skip" message="SQL Latecy problem">D:\Programming\Python\Projects\web_scanner\web_scanner_server\test_1.py:48: SQL Latecy problem</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestUserApi" name="test_create_user_2" file="test_1.py" line="58" time="0.077"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestUserApi" name="test_create_user_3" file="test_1.py" line="68" time="0.023"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestUserApi" name="test_delete_user_3" file="test_1.py" line="78" time="0.001"><skipped type="pytest.skip" message="SQL Latecy problem">D:\Programming\Python\Projects\web_scanner\web_scanner_server\test_1.py:79: SQL Latecy problem</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase></testsuite></testsuites>

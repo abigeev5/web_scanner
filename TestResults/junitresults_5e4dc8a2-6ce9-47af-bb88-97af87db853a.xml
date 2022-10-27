@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="2" tests="8" time="0.821" timestamp="2022-09-01T17:42:00.073761" hostname="abigeev"><testcase classname="test_1.TestAuthApi" name="test_get_token_1" file="test_1.py" line="26" time="0.013"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestAuthApi" name="test_get_token_2" file="test_1.py" line="32" time="0.008"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestAuthApi" name="test_get_token_3" file="test_1.py" line="37" time="0.018"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestAuthApi" name="test_get_token_4" file="test_1.py" line="42" time="0.005"><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestUserApi" name="test_create_user_1" file="test_1.py" line="49" time="0.001"><skipped type="pytest.skip" message="SQL Latecy problem">D:\Programming\Python\Projects\web_scanner\web_scanner_server\test_1.py:50: SQL Latecy problem</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestUserApi" name="test_create_user_2" file="test_1.py" line="60" time="0.056"><failure message="AttributeError: 'TestUserApi' object has no attribute 'api'">self = &lt;test_1.TestUserApi testMethod=test_create_user_2&gt;
+
+    def test_create_user_2(self):
+    	db_session.global_init()
+&gt;   	response = requests.post(self.api + 'user', json={
+    		'token': self.adminToken,
+    		'username': self.userLogin,
+    		'password': 'test'}, headers=self.headers)
+E    AttributeError: 'TestUserApi' object has no attribute 'api'
+
+test_1.py:63: AttributeError</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestUserApi" name="test_create_user_3" file="test_1.py" line="70" time="0.001"><failure message="AttributeError: 'TestUserApi' object has no attribute 'api'">self = &lt;test_1.TestUserApi testMethod=test_create_user_3&gt;
+
+    def test_create_user_3(self):
+    	db_session.global_init()
+&gt;   	response = requests.post(self.api + 'user', json={
+    		'token': self.userToken,
+    		'username': 'TestAccontForTest1427',
+    		'password': 'test'}, headers=self.headers)
+E    AttributeError: 'TestUserApi' object has no attribute 'api'
+
+test_1.py:73: AttributeError</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase><testcase classname="test_1.TestUserApi" name="test_delete_user_3" file="test_1.py" line="80" time="0.001"><skipped type="pytest.skip" message="SQL Latecy problem">D:\Programming\Python\Projects\web_scanner\web_scanner_server\test_1.py:81: SQL Latecy problem</skipped><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase></testsuite></testsuites>

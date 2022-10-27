@@ -1,0 +1,112 @@
+@font-face {
+    font-family: "Montserrat regular";
+    src: url("/static/css/fonts/Montserrat-Regular.eot");
+    src: url("/static/css/fonts/Montserrat-Regular.woff") format("woff"),
+    url("/static/css/fonts/Montserrat-Regular.otf") format("opentype"),
+    url("/static/css/fonts/Montserrat-Regular.svg") format("svg");
+}
+
+@font-face {
+    font-family: "Montserrat bold";
+    src: url("/static/css/fonts/Montserrat-Bold.eot");
+    src: url("/static/css/fonts/Montserrat-Bold.woff") format("woff"),
+    url("/static/css/fonts/Montserrat-Bold.otf") format("opentype"),
+    url("/static/css/fonts/Montserrat-Bold.svg") format("svg");
+}
+
+.text_wrapper {
+    text-decoration: none;
+    font-family: "Montserrat regular", sans-serif;
+    font-size: 16px;
+}
+
+.text_wrapper_bold {
+    text-decoration: none;
+    font-family: "Montserrat bold", sans-serif;
+    font-size: 20px;
+}
+
+.nav-tree > div > h4 > a {
+    font-size: 19px;
+    padding: 10px;
+    margin-left: 15px;
+    color: black;
+}
+.nav-tree > div > h4 > :not(.collapsed) > .fa-chevron-right {
+    display: none;
+}
+
+.nav-tree > div > h4 > .collapsed > .fa-chevron-down {
+    display: none;
+}
+
+.nav-tree > div > div > ul > li {
+    font-size: 18px !important;
+    padding: 10px;
+}
+
+.nav-tree > div > div > ul > li > a {
+    font-size: 18px !important;
+    margin: 10px;
+}
+
+.nav_wrapper {
+    text-decoration: none;
+    font-size: 19px;
+    color: black;
+    margin-right: 20px;
+}
+
+.nav_wrapper:hover{
+    color: #c02524 !important;
+}
+
+.nav_wrapper.active {
+    color: #c02524 !important;
+    text-decoration: none;
+    font-size: 19px;
+}
+
+.logo_wrapper {
+    width: 185px; 
+    height: auto;
+    margin: 34px;
+}
+
+.tab-item {
+    color: black;
+}
+
+.tab-item.active {
+    background-color: white !important;
+}
+
+.tab-item.active > .card {
+    background-color: #006a83 !important;
+}
+
+.param-bloc {
+    margin: 0px;
+    padding: 5px;
+    height: 100%;
+    width: 100%;
+}
+
+.param-title {
+    padding: 10px !important;
+}
+
+.param-line {
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 7px;
+}
+
+.param-button {
+    margin-bottom: 10px;
+    background-color: #9d9d9d;
+}
+
+.param-checkbox {
+    margin-left: 12px;
+}

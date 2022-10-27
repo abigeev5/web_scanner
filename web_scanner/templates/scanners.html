@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col flex-grow-1 border border-2 min-vh-100 max-vh-100">
+    <div class="row border-bottom border-between row-cols-auto flex-row flex-nowrap scrollable overflow-auto" style="background: {{accent_lightgray}}; margin: 0px; overflow-x: hidden;">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="margin-bottom: 5px !important;">
+            {% for idx in range(scanners|length) %}
+            <li class="border-end nav-link tab-item {% if idx == 0 %} active {% endif %}" id="scanner-{{idx}}-tab" data-bs-toggle="pill" data-bs-target="#scanner-{{idx}}" type="button" role="tab" aria-controls="scanner-{{idx}}" aria-selected="true" style="text-decoration: none; padding: 5px;">
+                <div class="card">
+                    <img class="card-img-top mx-auto" src="{{static}}/img/microscope.png" style="padding: 5px; max-width: 80px; height: auto;">
+                    <div class="card-body" style="padding-bottom: 2px; padding-top: 2px;">
+                        <p class="card-text text_wrapper" style="{% if idx == cur_scanner %} color: {{main_red}}; {% endif %} max-width: 65px;">{{scanners[idx]["name"]}}</p>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="row">
+        <div class="tab-content" id="scanners-tabContent">
+            {% for idx in range(scanners|length) %}
+            <div class="tab-pane fade show {% if idx == 0 %} active {% endif %}" id="scanner-{{idx}}" role="tabpanel" aria-labelledby="scanner-{{idx}}-tab">
+                <div class="row equal">
+                    <div class="col-sm-6"> 
+                        <div class="row border border-2 param-bloc">
+                            <h4 class="text-center border-bottom text_wrapper_bold param-title">Общие сведения</h4>
+                            <div class="col border-end">
+                                <form>
+                                    <div class="form-group row param-line">
+                                        <label class="col-sm-6 col-form-label text_wrapper" for="scnr-{{idx}}-general-0">Название</label>
+                                        <div class="col">
+                                            <input class="form-control" type="text" id="scnr-{{idx}}-param-general-0" value="{{scanners[idx]["name"]}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row param-line">
+                                        <label class="col-sm-6 col-form-label text_wrapper" for="scnr-{{idx}}-general-1">Версия</label>
+                                        <div class="col">
+                                            <input class="form-control" type="text" id="scnr-{{idx}}-param-general-1" value="{{scanners[idx]["version"]}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row param-line">
+                                        <label class="col-sm-6 col-form-label text_wrapper" for="scnr-{{idx}}-general-2">Описание</label>
+                                        <div class="col">
+                                            <input class="form-control" type="text" id="scnr-{{idx}}-param-general-2" value="{{scanners[idx]["description"]}}">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col">
+                                <form>
+                                    {% for key, value in scanners[idx]["connection"].items() %}
+                                    <div class="form-group row param-line">
+                                        <label class="col-sm-6 col-form-label text_wrapper" for="scnr-{{idx}}-con-{{loop.index}}">{{key}}</label>
+                                        <div class="col">
+                                            <input class="form-control" type="text" id="scnr-{{idx}}-con-{{loop.index}}" value="{{value}}">
+                                        </div>
+                                    </div>
+                                    {% endfor%}
+                                </form>
+                            </div>
+                            <button type="button" class="btn btn-secondary text_wrapper param-button" style="margin-top: 15px;">Сохранить</button>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border border-2 param-bloc">
+                            <h4 class="text-center border-bottom text_wrapper_bold param-title">Параметры сканирования</h4>
+                            <form>
+                                {% for param in scanners[idx]["settings"]["params"] %}
+                                {% if param["type"] == "float" %}
+                                <div class="form-group row param-line">
+                                    <label class="col-sm-6 col-form-label text_wrapper" for="scnr-{{idx}}-param-{{loop.index}}">{{param["name"]}}</label>
+                                    <div class="col">
+                                        <input class="form-control" type="number" id="scnr-{{idx}}-param-{{loop.index}}" placeholder="0.01" value="{{param["value"]}}">
+                                    </div>
+                                </div>
+                                {% elif param["type"] == "bool" %}
+                                <div class="form-check param-checkbox">
+                                    <label class="form-check-label text_wrapper" for="scnr-{{idx}}-param-{{loop.index}}">
+                                        {{param["name"]}}
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="scnr-{{idx}}-param-{{loop.index}}">
+                                </div>
+                                {% endif %}
+                                {% endfor%}
+                            </form>
+                            <button type="button" class="btn btn-secondary text_wrapper param-button">Сбосить</button>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border border-2 param-bloc"> 
+                            <h4 class="text-center border-bottom text_wrapper_bold param-title">Калибровка</h4>
+                            <form>
+                                {% for param in scanners[idx]["settings"]["calibration"] %}
+                                {% if param["type"] == "float" %}
+                                <div class="form-group row param-line">
+                                    <label class="col-sm-6 col-form-label text_wrapper" for="scnr-{{idx}}-calib-{{loop.index}}">{{param["name"]}}</label>
+                                    <div class="col">
+                                        <input class="form-control" type="number" id="scnr-{{idx}}-calib-{{loop.index}}" placeholder="0.01" value="{{param["value"]}}">
+                                    </div>
+                                </div>
+                                {% elif param["type"] == "bool" %}
+                                <div class="form-check param-checkbox">
+                                    <label class="form-check-label text_wrapper" for="scnr-{{idx}}-calib-{{loop.index}}">
+                                        {{param["name"]}}
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="scnr-{{idx}}-calib-{{loop.index}}">
+                                </div>
+                                {% endif %}
+                                {% endfor%}
+                            </form>
+                            <button type="button" class="btn btn-secondary param-button">Калибровать</button>
+                            <button type="button" class="btn btn-secondary param-button">Сбросить</button>
+                            <button type="button" class="btn btn-secondary param-button">Автокалибровка</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row equal" style="margin-top: 15px;">
+                    <div class="col">
+                        <div class="row border border-2 param-bloc"> 
+                            <h4 class="text-center border-bottom text_wrapper_bold param-title">Отладка</h4>
+                            <form>
+                                {% for param in scanners[idx]["settings"]["debug"] %}
+                                {% if param["type"] == "float" %}
+                                <div class="form-group row param-line">
+                                    <label class="col-sm-6 col-form-label text_wrapper" for="scnr-{{idx}}-debug-{{loop.index}}">{{param["name"]}}</label>
+                                    <div class="col">
+                                        <input class="form-control" type="number" id="scnr-{{idx}}-debug-{{loop.index}}" placeholder="0.01" value="{{param["value"]}}">
+                                    </div>
+                                </div>
+                                {% elif param["type"] == "bool" %}
+                                <div class="form-check param-checkbox">
+                                    <label class="form-check-label text_wrapper" for="scnr-{{idx}}-debug-{{loop.index}}">
+                                        {{param["name"]}}
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="scnr-{{idx}}-debug-{{loop.index}}">
+                                </div>
+                                {% endif %}
+                                {% endfor%}
+                            </form>
+                            <button type="button" class="btn btn-secondary param-button">Перезапустить</button>
+                            <button type="button" class="btn btn-secondary param-button">Отключить</button>
+                            <button type="button" class="btn btn-secondary param-button">Отладка</button>
+                            <button type="button" class="btn btn-secondary param-button">Коррекция ошибок</button>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border border-2 param-bloc"> 
+                            <h4 class="text-center border-bottom text_wrapper_bold param-title">Сканирование</h4>
+                            <form>
+                                {% for param in scanners[idx]["settings"]["scanning"] %}
+                                {% if param["type"] == "float" %}
+                                <div class="form-group row param-line">
+                                    <label class="col-sm-6 col-form-label text_wrapper" for="scnr-{{idx}}-scanning-{{loop.index}}">{{param["name"]}}</label>
+                                    <div class="col">
+                                        <input class="form-control" type="number" id="scnr-{{idx}}-scanning-{{loop.index}}" placeholder="0.01" value="{{param["value"]}}">
+                                    </div>
+                                </div>
+                                {% elif param["type"] == "bool" %}
+                                <div class="form-check param-checkbox">
+                                    <label class="form-check-label text_wrapper" for="scnr-{{idx}}-scanning-{{loop.index}}">
+                                        {{param["name"]}}
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="scnr-{{idx}}-scanning-{{loop.index}}">
+                                </div>
+                                {% endif %}
+                                {% endfor%}
+                            </form>
+                            <button type="button" class="btn btn-secondary param-button">В-Сканирование</button>
+                            <button type="button" class="btn btn-secondary param-button">Г-Сканирование</button>
+                            <button type="button" class="btn btn-secondary param-button">Сканирование</button>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row border border-2 param-bloc"> 
+                            <h4 class="text-center border-bottom text_wrapper_bold param-title">Сохранение данных</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

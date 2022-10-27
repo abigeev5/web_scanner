@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.145" timestamp="2022-08-30T13:54:09.115329" hostname="abigeev"><testcase classname="test_1.TestAuthApi" name="test_create_user_1" file="test_1.py" line="50" time="0.181"><failure message="AssertionError: None == None">self = &lt;test_1.TestAuthApi testMethod=test_create_user_1&gt;
+
+    def test_create_user_1(self):
+    	db_session.global_init()
+    	response = requests.post(self.api + 'user', json={
+    		'token': self.adminToken,
+    		'username': 'TestAccontForTest1427',
+    		'password': 'test'}, headers=self.headers)
+    	self.assertEqual(response.status_code, 200)
+&gt;   	self.assertNotEqual(get_user(username='TestAccontForTest1427'), None)
+E    AssertionError: None == None
+
+test_1.py:58: AssertionError</failure><system-out>--------------------------------- Captured Log ---------------------------------
+
+--------------------------------- Captured Out ---------------------------------
+
+</system-out><system-err>--------------------------------- Captured Err ---------------------------------
+
+</system-err></testcase></testsuite></testsuites>

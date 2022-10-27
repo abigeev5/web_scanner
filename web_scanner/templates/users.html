@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script>
+    function selectorFlow(selector) {
+        document.querySelectorAll("." + selector + ' .li-nav[data-bs-toggle="pill"]')
+            .forEach((t, i) => {
+                t.addEventListener("show.bs.tab", function (e) {
+                    var active = document.querySelector(
+                        "." + selector + " .li-nav.active"
+                    );
+                    active.classList.remove("active");
+                });
+            });
+    }
+    
+    selectorFlow("shared-nav-1");
+    selectorFlow("shared-nav-2");
+</script>
+<div class="modal fade" id="viewer-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text_wrapper" id="modal-title">Modal title</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>        
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row mx-auto">
+                        <div class="col-md-8">
+                            <canvas id="modal-canvas" style="width: 100%;" width="800" height="600"></canvas>
+                        </div>
+                        <div class="col-6 col-md-4 flex-grow-1">
+                            <div class="row">
+                                <h4 class="mb-0" id="modal-barcode">bar</h4>
+                            </div>
+                            <div class="row mb-1 ">
+                                <div class="col-sm-5">
+                                    <p class="text_wrapper" id="modal-date" style="color: {{accent_gray}}">Дата: </p>
+                                    <p class="text_wrapper" id="modal-scanner" style="color: {{accent_gray}}">Сканер: </p>
+                                    <p class="text_wrapper" id="modal-user" style="color: {{accent_gray}}">Пользователь: </p>
+                                    <button type="button" class="btn btn-primary" id="modal-show" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                        Отобразить
+                                      </button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="text_wrapper" id="modal-date-field"></p>
+                                    <p class="text_wrapper" id="modal-scanner-field"></p>
+                                    <p class="text_wrapper" id="modal-user-field"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="modal-send">Отправить</button>
+                <a id='delete-img'><button class="btn btn-primary" id="modal-delete">Удалить</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col border border-2 min-vh-100 max-vh-100 d-flex flex-column">
+    <div class="row flex-grow-1">
+        <div class="row min-vh-100">
+            <div class="col-sm-4 border-end">
+                <!-- Tree view-->
+                <div class="nav-tree d-flex flex-column">
+                    {% for role, user_list in users.items() %}
+                    <div id="users-{{role}}">
+                        <h4 class="mb-0">
+                            <a class="btn btn-link text_wrapper collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-{{role}}" aria-controls="collapse-{{role}}" aria-expanded="false">
+                                <i class="fa-solid fa-chevron-right" style="margin-right: 10px;"></i><i class="fa-solid fa-chevron-down" style="margin-right: 10px;"></i>{{role}}
+                            </a>
+                        </h4>
+                        <div id="collapse-{{role}}" class="collapse">
+                            <ul role="tablist" class="shared-nav-{{loop.index}}" aria-orientation="vertical">
+                                {% for cur_user in user_list %}
+                                <li class="li-nav" data-value="{{cur_user["username"]}}"  id="user-{{cur_user["username"]}}-tab" data-bs-toggle="pill" data-bs-target="#user-{{cur_user["username"]}}" type="button" role="tab" aria-controls="user-{{cur_user["username"]}}" aria-selected="true">
+                                    <a class="text_wrapper" style="color: black; width: 100%; font-size: 16px;">{{cur_user["username"]}}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- End tree view-->
+            </div>
+            <div class="col-sm-8 tab-content" style="padding: 10px; max-height: 1000px;" id="users-tabContent-2">
+                {% for user_list in users.values()%}
+                {% for cur_user in user_list %}
+                <div class="tab-pane fade show" id="user-{{cur_user["username"]}}" role="tabpanel" aria-labelledby="user-{{cur_user["username"]}}-tab">
+                    <div class="card-body media align-items-center">
+                        <div class="card-body" style="padding: 0px;">
+                            <div class="form-group">
+                                <label class="form-label text_wrapper">Логин</label>
+                                <input type="text" class="form-control mb-1 text_wrapper" value="{{cur_user["username"]}}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label text_wrapper">ФИО</label>
+                                <input type="text" class="form-control mb-1 text_wrapper" value="{{cur_user["FIO"]}}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label text_wrapper">Должность</label>
+                                <input type="text" class="form-control text_wrapper" value="{{cur_user["information"]}}">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label text_wrapper">Роль</label>
+                                <select class="custom-select text_wrapper">
+                                    <option>Оператор</option>
+                                    <option selected="">Администратор</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label text_wrapper">Почта</label>
+                                <input type="text" class="form-control mb-1 text_wrapper" value="test@mail.ru">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label text_wrapper">Отдел</label>
+                            <input type="text" class="form-control text_wrapper" value="БМТ-1">
+                        </div>
+                    </div>
+                    <div class="text-end mt-3">
+                        <button type="button" class="btn btn-primary text_wrapper">Сохранить</button>&nbsp;
+                        <button type="button" class="btn btn-default text_wrapper">Отменить</button>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row fixed-row-bottom text-center" style="margin: 0px; background: {{accent_lightgray}};">
+        <div class="col-6 col-md-4 border-end text_wrapper">10 отсканировано</div>
+        <div class="col-6 col-md-4 border-end text_wrapper">1 положительный</div>
+        <div class="col-6 col-md-4 text_wrapper">8 отправлено в ЛИС</div>
+    </div>
+</div>
+{% endblock %}
